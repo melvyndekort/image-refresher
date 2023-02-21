@@ -10,7 +10,7 @@ If you want to update the image of running containers, use [Watchtower](https://
 
 Specify environment variables for each image you'd like to have refreshed with
 ```
--e IMAGE[number]=[repository:tag]
+-e REFRESHER_IMAGE[number]=[repository:tag]
 ```
 
 You have to configure the interval at which the scanner is scheduled:
@@ -20,17 +20,17 @@ You have to configure the interval at which the scanner is scheduled:
 
 You have to configure the Slack Webhook URL:
 ```
--e SLACK_WEBHOOK_URL=[URL]
+-e REFRESHER_SLACK_WEBHOOK_URL=[URL]
 ```
 
 ### example
 ```
 docker run \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -e REFRESHER_INTERVAL=7200 \
-  -e SLACK_WEBHOOK_URL=https://hooks.slack.com/services/ABC123/ABC123/ABC123 \
-  -e IMAGE1=alpine:latest \
-  -e IMAGE2=busybox:latest \
-  -e IMAGE3=python:3.10-slim \
+  -e REFRESHER_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/ABC123/ABC123/ABC123 \
+  -e REFRESHER_IMAGE1=alpine:latest \
+  -e REFRESHER_IMAGE2=busybox:latest \
+  -e REFRESHER_IMAGE3=python:3.10-slim \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
   melvyndekort/image-refresher
 ```

@@ -13,7 +13,7 @@ from slack_sdk.webhook import WebhookClient
 formatter = '%(asctime)s - %(levelname)s - %(message)s'
 logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=formatter)
 
-webhook_url = os.environ['SLACK_WEBHOOK_URL']
+webhook_url = os.environ['REFRESHER_SLACK_WEBHOOK_URL']
 
 # Function setup
 def refresh(images):
@@ -40,7 +40,7 @@ def refresh(images):
 
 images = []
 for key, imagename in os.environ.items():
-  if key.startswith('IMAGE'):
+  if key.startswith('REFRESHER_IMAGE'):
     images.append(imagename)
 
 logging.info('Monitoring images: {}'.format(', '.join(images)))
