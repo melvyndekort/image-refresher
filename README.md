@@ -19,4 +19,5 @@ docker run \
   -e IMAGE1=alpine:latest
   -e IMAGE2=busybox:latest
   -e IMAGE3=python:3.10-slim
+  melvyndekort/image-refresher
 ```
