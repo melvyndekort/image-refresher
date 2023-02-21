@@ -15,9 +15,9 @@ Specify environment variables for each image you'd like to have refreshed with
 ### example
 ```
 docker run \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro
-  -e IMAGE1=alpine:latest
-  -e IMAGE2=busybox:latest
-  -e IMAGE3=python:3.10-slim
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -e IMAGE1=alpine:latest \
+  -e IMAGE2=busybox:latest \
+  -e IMAGE3=python:3.10-slim \
   melvyndekort/image-refresher
 ```
