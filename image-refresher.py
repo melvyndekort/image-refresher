@@ -13,10 +13,12 @@ from slack_sdk.webhook import WebhookClient
 formatter = '%(asctime)s - %(levelname)s - %(message)s'
 logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=formatter)
 
+webhook_url = os.environ['SLACK_WEBHOOK_URL']
+
 # Function setup
 def refresh(images):
   client = docker.from_env()
-  webhook = WebhookClient(os.environ['SLACK_WEBHOOK_URL'])
+  webhook = WebhookClient(webhook_url)
 
   for imagename in images:
     logging.info('Checking image for refresh: {}'.format(imagename))
@@ -32,7 +34,7 @@ def refresh(images):
       else:
         logging.error('Slack webhook unsuccesful, result: {}'.format(response.body))
     else:
-      print("No refresh needed for image: {}".format(imagename))
+      logging.info("No refresh needed for image: {}".format(imagename))
   
   client.close()
 
@@ -44,9 +46,10 @@ for key, imagename in os.environ.items():
 logging.info('Monitoring images: {}'.format(', '.join(images)))
 
 # Task scheduling
-# 15 minutes after every 2 hours refresh() is called.
-schedule.every(2).hours.at(':15').do(refresh, images=images)
-logging.info('Scheduling 15 minutes after every 2 hours')
+# Get interval how often refresh() is called from environment variables.
+interval = int(os.environ['REFRESHER_INTERVAL'])
+schedule.every(interval).seconds.do(refresh, images=images)
+logging.info('Scheduling interval every {} seconds'.format(interval))
 
 # Loop so that the scheduling task keeps on running all time.
 while True:
