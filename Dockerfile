@@ -1,5 +1,5 @@
 ## Build environment
-FROM python:3.11-alpine AS venv
+FROM python:3.11.3-alpine AS venv
 
 RUN python -m venv --copies /venv
 
@@ -8,7 +8,7 @@ RUN /venv/bin/pip install --upgrade pip
 RUN /venv/bin/pip install -Ur /requirements.txt
 
 # Runtime environment
-FROM python:3.11-alpine AS runtime
+FROM python:3.11.3-alpine AS runtime
 COPY --from=venv /venv /venv
 
 ENTRYPOINT ["/venv/bin/python3"]
