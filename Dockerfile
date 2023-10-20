@@ -1,19 +1,21 @@
-## Build environment
-FROM python:3.11.3-alpine AS venv
+FROM python:3-slim AS build
 
-RUN python -m venv --copies /venv
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
-COPY requirements.txt /
-RUN /venv/bin/pip install --upgrade pip
-RUN /venv/bin/pip install -Ur /requirements.txt
+COPY requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 
-# Runtime environment
-FROM python:3.11.3-alpine AS runtime
-COPY --from=venv /venv /venv
+COPY *.py /opt/venv/bin/
 
-ENTRYPOINT ["/venv/bin/python3"]
 
-COPY image-refresher.py /app/
+FROM python:3-alpine AS runtime
 
-WORKDIR /app
+LABEL org.opencontainers.image.source http://github.com/melvyndekort/image-refresher
+
+COPY --from=build /opt/venv /opt/venv
+
+ENV PATH="/opt/venv/bin:$PATH"
+
 CMD ["image-refresher.py"]
