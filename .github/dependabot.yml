@@ -6,8 +6,16 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    assignees:
+      - "melvyndekort"
+    reviewers:
+      - "melvyndekort"
   # Maintain dependencies for Docker
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "daily"
+    assignees:
+      - "melvyndekort"
+    reviewers:
+      - "melvyndekort"
