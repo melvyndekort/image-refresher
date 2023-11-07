@@ -24,7 +24,7 @@ def get_image_id(image):
 def refresh(image):
     logging.info('Checking %s for refresh', image)
     old = get_image_id(image)
-    
+
     if not old:
         client.images.pull(image)
         logging.info('New image pulled: %s', image)
@@ -43,7 +43,7 @@ def main():
         INTERVAL = 7200
     logging.info('Interval was set to %d', INTERVAL)
 
-    for k,v in os.environ.items():
+    for k, v in os.environ.items():
         if k.startswith('REFRESHER_IMAGE'):
             refresh(v)
             scheduler.add_job(refresh, IntervalTrigger(seconds=INTERVAL), name=v, args=[v])
