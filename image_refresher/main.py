@@ -46,7 +46,12 @@ def main():
     for k, v in os.environ.items():
         if k.startswith('REFRESHER_IMAGE'):
             refresh(v)
-            scheduler.add_job(refresh, IntervalTrigger(seconds=INTERVAL), name=v, args=[v])
+            scheduler.add_job(
+                refresh,
+                IntervalTrigger(seconds=INTERVAL),
+                name=v,
+                args=[v]
+            )
 
     scheduler.start()
 
