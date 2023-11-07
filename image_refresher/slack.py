@@ -14,8 +14,6 @@ else:
 
 def notify(message):
     if webhook:
-        response = webhook.send(text='Image refreshed: {}'.format(imagename))
-        if response.status_code == 200 and response.body == "ok":
-            logging.info('Slack webhook successful')
-        else:
-            logging.error('Slack webhook unsuccesful, result: {}'.format(response.body))
+        response = webhook.send(text=message)
+        if response.status_code != 200 or response.body != "ok":
+            logging.error('Slack webhook unsuccesful, result: %s', response.body)
