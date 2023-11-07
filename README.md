@@ -1,4 +1,16 @@
-## Image refresher
+# IMAGE-REFRESHER
+
+## Badges
+
+### Quality
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/71ecf3dfaf6ecf361640/maintainability)](https://codeclimate.com/github/melvyndekort/image-refresher/maintainability) [![codecov](https://codecov.io/gh/melvyndekort/image-refresher/graph/badge.svg?token=J3tLYcZWAT)](https://codecov.io/gh/melvyndekort/image-refresher)
+
+### Workflows
+
+![pipeline](https://github.com/melvyndekort/image-refresher/actions/workflows/pipeline.yml/badge.svg)
+
+## Purpose
 
 This project updates specified docker images on the host system.
 A notification is sent to a Slack channel when an image is successfully refreshed.
@@ -9,21 +21,25 @@ If you want to update the image of running containers, use [Watchtower](https://
 ## How to use
 
 Specify environment variables for each image you'd like to have refreshed with
+
 ```
 -e REFRESHER_IMAGE[number]=[repository:tag]
 ```
 
 You have to configure the interval at which the scanner is scheduled:
+
 ```
 -e REFRESHER_INTERVAL=[seconds]
 ```
 
 You have to configure the Slack Webhook URL:
+
 ```
 -e REFRESHER_SLACK_WEBHOOK_URL=[URL]
 ```
 
-### example
+### Example
+
 ```
 docker run \
   -e REFRESHER_INTERVAL=7200 \
