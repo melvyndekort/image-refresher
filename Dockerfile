@@ -1,21 +1,28 @@
-FROM python:3-slim AS build
+FROM python:3-slim AS base
 
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-
-COPY requirements.txt .
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install "poetry>=1.6,<1.7"
 
-COPY *.py /opt/venv/bin/
+
+RUN python -m venv /venv
+ENV PATH="/venv/bin:$PATH"
+
+
+FROM base as build
+
+COPY pyproject.toml poetry.lock ./
+RUN poetry export -f requirements.txt | pip install -r /dev/stdin
+
+COPY . .
+RUN poetry build && pip install dist/*.whl
 
 
 FROM python:3-alpine AS runtime
 
 LABEL org.opencontainers.image.source http://github.com/melvyndekort/image-refresher
 
-COPY --from=build /opt/venv /opt/venv
+COPY --from=build /venv /venv
 
-ENV PATH="/opt/venv/bin:$PATH"
+ENV PATH="/venv/bin:$PATH"
 
-CMD ["image-refresher.py"]
+CMD ["python3", "-m", "image_refresher.main"]
