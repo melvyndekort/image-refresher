@@ -1,3 +1,0 @@
-docker
-schedule
-slack_sdk
