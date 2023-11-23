@@ -7,7 +7,7 @@ authors = ["Melvyn de Kort <melvyn@mdekort.nl>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 docker = "^6.1"
-slack-sdk = "^3.25"
+slack-sdk = "^3.26"
 APScheduler = "^3.10.4"
 
 [tool.poetry.dev-dependencies]
