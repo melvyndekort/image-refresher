@@ -8,7 +8,7 @@ authors = ["Melvyn de Kort <melvyn@mdekort.nl>"]
 python = "^3.9"
 docker = "^7.1"
 requests = "<2.33.0" # Temporarily pin version because of https://github.com/docker/docker-py/issues/3256
-slack-sdk = "^3.28"
+slack-sdk = "^3.29"
 APScheduler = "^3.10.4"
 
 [tool.poetry.dev-dependencies]
