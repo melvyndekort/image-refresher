@@ -19,7 +19,7 @@ RUN poetry build && pip install dist/*.whl
 
 FROM python:3-alpine3.19 AS runtime
 
-LABEL org.opencontainers.image.source http://github.com/melvyndekort/image-refresher
+LABEL org.opencontainers.image.source https://github.com/melvyndekort/image-refresher
 
 COPY --from=build /venv /venv
 
