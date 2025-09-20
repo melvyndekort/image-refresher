@@ -8,7 +8,7 @@ FORMAT = '%(asctime)s %(levelname)s %(name)s: %(message)s'
 logging.basicConfig(level=logging.INFO, format=FORMAT)
 logger = logging.getLogger(__name__)
 
-from image_refresher import slack
+from image_refresher import ntfy
 
 scheduler = BlockingScheduler()
 client = docker.from_env()
@@ -31,7 +31,7 @@ def refresh(image):
     elif client.images.pull(image).id != old:
         client.images.remove(old)
         logging.info('Existing image refreshed: %s', image)
-        slack.notify(f'Existing image refreshed: {image}')
+        ntfy.notify(f'Existing image refreshed: {image}')
     else:
         logging.info("No refresh needed for %s", image)
 

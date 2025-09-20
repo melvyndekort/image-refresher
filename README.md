@@ -13,7 +13,7 @@
 ## Purpose
 
 This project updates specified docker images on the host system.
-A notification is sent to a Slack channel when an image is successfully refreshed.
+A notification is sent to an ntfy server when an image is successfully refreshed.
 
 The use case is to update images that have **NO** running containers.
 If you want to update the image of running containers, use [Watchtower](https://hub.docker.com/r/containrrr/watchtower) instead.
@@ -32,10 +32,11 @@ You have to configure the interval at which the scanner is scheduled:
 -e REFRESHER_INTERVAL=[seconds]
 ```
 
-You have to configure the Slack Webhook URL:
+You have to configure the ntfy server URL and token:
 
 ```
--e REFRESHER_SLACK_WEBHOOK_URL=[URL]
+-e NTFY_URL=[URL]
+-e NTFY_TOKEN=[TOKEN]
 ```
 
 ### Example
@@ -43,7 +44,8 @@ You have to configure the Slack Webhook URL:
 ```
 docker run \
   -e REFRESHER_INTERVAL=7200 \
-  -e REFRESHER_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/ABC123/ABC123/ABC123 \
+  -e NTFY_URL=https://ntfy.example.com/topic \
+  -e NTFY_TOKEN=tk_abc123 \
   -e REFRESHER_IMAGE1=alpine:latest \
   -e REFRESHER_IMAGE2=busybox:latest \
   -e REFRESHER_IMAGE3=python:3.10-slim \
