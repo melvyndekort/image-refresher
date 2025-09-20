@@ -50,5 +50,5 @@ docker run \
   -e REFRESHER_IMAGE2=busybox:latest \
   -e REFRESHER_IMAGE3=python:3.10-slim \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  melvyndekort/image-refresher
+  ghcr.io/melvyndekort/image-refresher:latest
 ```
