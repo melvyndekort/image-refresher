@@ -5,22 +5,22 @@ clean:
 	@rm -rf .pytest_cache dist __pycache__ */__pycache__
 
 install: clean
-	@poetry install
+	@uv sync --all-extras
 
 update-deps:
-	@poetry update
+	@uv sync --upgrade --all-extras
 
 test: install
-	@poetry run pytest
+	@uv run pytest
 
 build: test
-	@poetry build
+	@uv build
 
 full-build: clean
 	@docker image build -t image-refresher .
 
 pylint:
-	@poetry run pylint image_refresher
+	@uv run pylint image_refresher
 
 run: install
-	@REFRESHER_IMAGE_1=alpine:latest poetry run python3 -m image_refresher.main
+	@REFRESHER_IMAGE_1=alpine:latest uv run python3 -m image_refresher.main
