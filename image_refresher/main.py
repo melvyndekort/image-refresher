@@ -28,6 +28,7 @@ def refresh(image):
     if not old:
         client.images.pull(image)
         logging.info('New image pulled: %s', image)
+        ntfy.notify(f'New image pulled: {image}')
     elif client.images.pull(image).id != old:
         client.images.remove(old)
         logging.info('Existing image refreshed: %s', image)
