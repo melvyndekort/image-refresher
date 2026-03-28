@@ -15,7 +15,7 @@ Periodically checks for updated Docker images and pulls them on the host. Uses D
 - `image_refresher/` — Application source
 - `tests/` — Test suite
 - `Dockerfile` — Multi-stage Alpine build
-- `Makefile` — `install`, `test`, `lint` (pylint), `build`, `full-build`, `run`
+- `Makefile` — `install`, `test`, `lint`, `format` (pylint), `build`, `full-build`, `run`
 
 ## Deployment
 

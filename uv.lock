@@ -472,7 +472,7 @@ requires-dist = [
     { name = "pylint", marker = "extra == 'dev'", specifier = ">=3.3" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.4" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=7.0" },
-    { name = "requests", specifier = "<2.33.0" },
+    { name = "requests", specifier = ">=2.32" },
 ]
 provides-extras = ["dev"]
 
