@@ -19,6 +19,9 @@ build: test
 full-build: clean
 	@docker image build -t image-refresher .
 
+lint: install
+	@uv run pylint image_refresher
+
 pylint:
 	@uv run pylint image_refresher
 
