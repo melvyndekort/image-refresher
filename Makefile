@@ -22,8 +22,11 @@ full-build: clean
 lint: install
 	@uv run pylint image_refresher
 
-pylint:
-	@uv run pylint image_refresher
+pylint: lint
 
 run: install
 	@REFRESHER_IMAGE_1=alpine:latest uv run python3 -m image_refresher.main
+
+format: install
+	@uv run ruff format .
+	@uv run ruff check --fix .
